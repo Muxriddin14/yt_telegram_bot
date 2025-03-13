@@ -1,6 +1,6 @@
 from flask import Flask
 import asyncio
-import downloader  # Sizning bot kodingiz downloader.py faylida
+import downloader
 
 app = Flask(__name__)
 
@@ -9,10 +9,10 @@ def home():
     return "Bot is running!"
 
 async def run_bot():
-    await downloader.main()  # downloader.py ichidagi asosiy bot funksiyasini asinxron chaqirish
+    await downloader.main()
 
 if __name__ == "__main__":
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    loop.create_task(run_bot())  # Botni ishga tushiramiz
-    app.run(host="0.0.0.0", port=10000)  # Flask server 10000-portda ishlaydi
+    loop.create_task(run_bot())
+    app.run(host="0.0.0.0", port=10000) 
