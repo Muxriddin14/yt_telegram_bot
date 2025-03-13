@@ -1,5 +1,6 @@
-from flask import Flask
 import asyncio
+import threading
+from flask import Flask
 import downloader
 
 app = Flask(__name__)
@@ -8,11 +9,10 @@ app = Flask(__name__)
 def home():
     return "Bot is running!"
 
-async def run_bot():
-    await downloader.main()
+def run_bot():
+    asyncio.run(downloader.main())
+
+threading.Thread(target=run_bot, daemon=True).start()
 
 if __name__ == "__main__":
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.create_task(run_bot())
-    app.run(host="0.0.0.0", port=10000) 
+    app.run(host="0.0.0.0", port=10000)
